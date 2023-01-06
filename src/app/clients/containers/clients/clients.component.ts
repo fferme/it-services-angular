@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { Client } from '../../model/client';
 import { ClientsService } from '../../services/clients.service';
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-clients',
@@ -21,7 +21,8 @@ export class ClientsComponent implements OnInit {
     private clientsService: ClientsService,
     public dialog: MatDialog,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private location: Location
     ) {
     this.clients$ = this.clientsService.list()
     .pipe(
@@ -39,6 +40,11 @@ export class ClientsComponent implements OnInit {
       data: errorMsg
     });
   }
+
+  onBack() {
+    this.location.back();
+  }
+
   ngOnInit(): void {
 
   }

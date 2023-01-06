@@ -1,5 +1,5 @@
 mat-card {
-  max-width: 80%;
+  width: 600px;
   margin: 2em auto;
   text-align: center;
 }
@@ -19,4 +19,8 @@ mat-card {
 
 .actions-center {
   justify-content: center;
+}
+
+.gender-button {
+  display: flex;
 }
