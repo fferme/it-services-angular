@@ -24,4 +24,8 @@ export class ClientsService {
     return this.httpClient.post<Client>(this.API, client)
     .pipe(first());
   }
+
+  loadById(id: string) {
+    return this.httpClient.get<Client>(`${this.API}/${id}`);
+  }
 }

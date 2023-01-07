@@ -1,16 +1,19 @@
 <mat-card>
   <mat-card-content>
-    <mat-toolbar color="primary">Clients</mat-toolbar>
+    <mat-toolbar color="primary">
+      Clients
+      <div class="back-button">
+        <button mat-raised-button color="warn" (click)="onBack()">Voltar</button>
+      </div>
+    </mat-toolbar>
 
-  <div class="back-button">
-    <button mat-raised-button color="warn" (click)="onBack()">Voltar</button>
-  </div>
 
     <div class="column-flex mat-elevation-z8">
       <app-clients-list
        *ngIf="clients$ | async as clients; else loading"
        [clients]="clients"
        (add)="onAdd()"
+       (edit)="onEdit($event)"
        ></app-clients-list>
 
       <ng-template #loading>
@@ -19,6 +22,8 @@
         </div>
       </ng-template>
     </div>
+
+
 
   </mat-card-content>
 </mat-card>

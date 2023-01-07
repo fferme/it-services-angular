@@ -4,6 +4,8 @@ import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ClientsService } from '../../services/clients.service';
+import { ActivatedRoute } from '@angular/router';
+import { Client } from '../../model/client';
 
 @Component({
   selector: 'app-client-form',
@@ -12,8 +14,9 @@ import { ClientsService } from '../../services/clients.service';
 })
 export class ClientFormComponent {
   form = this.formBuilder.group({
+    _id: [''],
     name: [''],
-    gender: [''],
+    gender: ['M'],
     phoneNumber: [''],
     district: [''],
     reference: ['']
@@ -22,7 +25,17 @@ export class ClientFormComponent {
   constructor(private formBuilder: NonNullableFormBuilder,
     private clientService: ClientsService,
     private _snackBar: MatSnackBar,
-    private location: Location) {
+    private location: Location,
+    private route: ActivatedRoute) {
+      const client: Client = this.route.snapshot.data['client'];
+      this.form.setValue({
+        _id: client._id,
+        name: client.name,
+        gender: client.gender,
+        phoneNumber: client.phoneNumber,
+        district: client.district,
+        reference: client.reference
+      });
   }
 
   onSubmit() {
@@ -42,7 +55,7 @@ export class ClientFormComponent {
   }
 
   private onError() {
-    this._snackBar.open("Erro ao salvar curso", '', {duration: 3000})
+    this._snackBar.open("Erro ao salvar cliente", '', {duration: 3000})
   }
 
 }

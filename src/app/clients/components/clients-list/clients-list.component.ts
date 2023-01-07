@@ -11,6 +11,7 @@ export class ClientsListComponent implements OnInit{
 
   @Input() clients: Client[] = [];
   @Output() add = new EventEmitter(false);
+  @Output() edit = new EventEmitter(false);
 
   readonly displayedColumns = ['actions', 'name', 'gender', 'phoneNumber', 'district', 'reference'];
 
@@ -24,5 +25,9 @@ export class ClientsListComponent implements OnInit{
 
   onAdd() {
     this.add.emit(true);
+  }
+
+  onEdit(client: Client) {
+    this.edit.emit(client)
   }
 }

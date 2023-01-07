@@ -53,4 +53,8 @@ export class ClientsComponent implements OnInit {
     this.router.navigate(['new'], {relativeTo: this.activeRoute} );
   }
 
+  onEdit(client: Client) {
+    this.router.navigate(['edit', client._id], {relativeTo: this.activeRoute} );
+  }
+
 }
