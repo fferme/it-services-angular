@@ -20,12 +20,26 @@ export class ClientsService {
     );
   }
 
+  loadById(id: string) {
+    return this.httpClient.get<Client>(`${this.API}/${id}`);
+  }
+
   save(client: Partial<Client>) {
+    console.log(client);
+    if (client._id) {
+      console.log(client);
+      return this.update(client);
+    }
+    return this.create(client);
+  }
+
+  private create(client: Partial<Client>) {
     return this.httpClient.post<Client>(this.API, client)
     .pipe(first());
   }
 
-  loadById(id: string) {
-    return this.httpClient.get<Client>(`${this.API}/${id}`);
+  private update(client: Partial<Client>) {
+    return this.httpClient.put<Client>(`${this.API}/${client._id}`, client)
+    .pipe(first());
   }
 }

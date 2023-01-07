@@ -2,10 +2,10 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-import { ClientsService } from '../../services/clients.service';
 import { ActivatedRoute } from '@angular/router';
+
 import { Client } from '../../model/client';
+import { ClientsService } from '../../services/clients.service';
 
 @Component({
   selector: 'app-client-form',
