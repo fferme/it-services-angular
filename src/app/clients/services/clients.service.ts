@@ -42,4 +42,9 @@ export class ClientsService {
     return this.httpClient.put<Client>(`${this.API}/${client._id}`, client)
     .pipe(first());
   }
+
+  delete(id: string) {
+    return this.httpClient.delete(`${this.API}/${id}`)
+    .pipe(first());
+  }
 }
