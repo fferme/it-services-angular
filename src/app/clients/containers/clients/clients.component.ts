@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, first, of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { Client } from '../../model/client';
@@ -60,17 +61,24 @@ export class ClientsComponent {
   }
 
   onDelete(client: Client) {
-    this.clientsService.delete(client._id).subscribe({
-      next: (result) => {
-        this.refresh();
-        this.snackBar.open("Cliente removido com sucesso!", 'X', {
-          duration: 5000,
-          verticalPosition: 'top',
-          horizontalPosition: 'center'
-        })
-      },
-      error: (error) => this.onError("Erro ao tentar remover curso")
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: 'Confirmar deleção?',
     });
-  }
 
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.clientsService.delete(client._id).subscribe({
+          next: (result) => {
+            this.refresh();
+            this.snackBar.open("Cliente removido com sucesso!", 'X', {
+              duration: 5000,
+              verticalPosition: 'top',
+              horizontalPosition: 'center'
+            })
+          },
+          error: (error) => this.onError("Erro ao tentar remover curso")
+        });
+      }
+    })
+  }
 }
