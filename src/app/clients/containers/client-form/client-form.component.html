@@ -2,26 +2,26 @@
   <mat-card-content>
     <mat-toolbar color="primary">Clients</mat-toolbar>
 
-    <form [formGroup]="form" class="min-width">
+    <form [formGroup]="clientForm" class="min-width">
       <mat-form-field class="full-width">
-        <input matInput placeholder="Name" formControlName="name">
+        <input formControlName="name" matInput placeholder="Name" formControlName="name">
       </mat-form-field>
 
-      <mat-radio-group aria-label="Gender" class="gender-button" >
-        <mat-radio-button value="M" checked>Masculino</mat-radio-button>
+      <mat-radio-group formControlName="gender" aria-label="Gender" class="gender-button" >
+        <mat-radio-button  value="M" checked>Masculino</mat-radio-button>
         <mat-radio-button value="F">Feminino</mat-radio-button>
       </mat-radio-group>
 
       <mat-form-field class="full-width">
-        <input matInput placeholder="Phone Number" formControlName="phoneNumber">
+        <input matInput formControlName="phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <input matInput placeholder="District" formControlName="district">
+        <input matInput formControlName="district" placeholder="District" formControlName="district">
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <input matInput placeholder="Reference" formControlName="reference">
+        <input matInput formControlName="reference" placeholder="Reference" formControlName="reference">
       </mat-form-field>
     </form>
   </mat-card-content>

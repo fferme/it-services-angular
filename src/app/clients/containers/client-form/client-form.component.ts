@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,22 +13,25 @@ import { ClientsService } from '../../services/clients.service';
   styleUrls: ['./client-form.component.scss']
 })
 export class ClientFormComponent {
-  form = this.formBuilder.group({
-    _id: [''],
-    name: [''],
-    gender: ['M'],
-    phoneNumber: [''],
-    district: [''],
-    reference: ['']
-  });
 
-  constructor(private formBuilder: NonNullableFormBuilder,
+  public clientForm!: FormGroup;
+
+  constructor(
     private clientService: ClientsService,
     private _snackBar: MatSnackBar,
     private location: Location,
     private route: ActivatedRoute) {
+      this.clientForm = new FormGroup({
+        _id: new FormControl('', [Validators.required]),
+        name: new FormControl('', [Validators.required]),
+        gender: new FormControl('', [Validators.required]),
+        phoneNumber: new FormControl('', [Validators.required]),
+        district: new FormControl('', [Validators.required]),
+        reference: new FormControl('', [Validators.required])
+      })
+
       const client: Client = this.route.snapshot.data['client'];
-      this.form.setValue({
+      this.clientForm.setValue({
         _id: client._id,
         name: client.name,
         gender: client.gender,
@@ -36,10 +39,11 @@ export class ClientFormComponent {
         district: client.district,
         reference: client.reference
       });
+
   }
 
   onSubmit() {
-    this.clientService.save(this.form.value).subscribe({
+    this.clientService.save(this.clientForm.value).subscribe({
       next: (result) => this.onSucess(),
       error: (error) => this.onError()
     })
