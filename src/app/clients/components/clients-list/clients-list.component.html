@@ -8,42 +8,42 @@
     </mat-header-cell>
 
     <mat-cell *matCellDef="let client" class="action-column">
-      <button mat-icon-button color="primary" aria-label="Editar Curso" (click)="onEdit(client)">
+      <button mat-icon-button color="primary" aria-label="Editar Cliente" (click)="onEdit(client)">
         <mat-icon>edit</mat-icon>
       </button>
 
-      <button mat-icon-button color="warn" aria-label="Remover Curso" (click)="onDelete(client)">
+      <button mat-icon-button color="warn" aria-label="Remover Cliente" (click)="onDelete(client)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>
   </ng-container>
 
   <!-- Name Column -->
-  <ng-container matColumnDef="name">
+  <ng-container matColumnDef="Nome">
     <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
     <mat-cell *matCellDef="let client">{{ client.name }}</mat-cell>
   </ng-container>
 
   <!-- Gender Column -->
-  <ng-container matColumnDef="gender">
+  <ng-container matColumnDef="Gênero">
     <mat-header-cell *matHeaderCellDef>Gender</mat-header-cell>
     <mat-cell *matCellDef="let client">{{ client.gender }}</mat-cell>
   </ng-container>
 
   <!-- Phone Number Column -->
-  <ng-container matColumnDef="phoneNumber">
+  <ng-container matColumnDef="Celular">
     <mat-header-cell *matHeaderCellDef>Phone Number</mat-header-cell>
     <mat-cell *matCellDef="let client">{{ client.phoneNumber }}</mat-cell>
   </ng-container>
 
   <!-- neighbourhood Column -->
-  <ng-container matColumnDef="neighbourhood">
+  <ng-container matColumnDef="Bairro">
     <mat-header-cell *matHeaderCellDef>neighbourhood</mat-header-cell>
     <mat-cell *matCellDef="let client">{{ client.neighbourhood }}</mat-cell>
   </ng-container>
 
   <!-- Reference Column -->
-  <ng-container matColumnDef="reference">
+  <ng-container matColumnDef="Referência">
     <mat-header-cell *matHeaderCellDef>Reference</mat-header-cell>
     <mat-cell *matCellDef="let client">{{ client.reference }}</mat-cell>
   </ng-container>
