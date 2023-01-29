@@ -16,6 +16,6 @@ export class ClientResolver implements Resolve<Client> {
     if (route.params && route.params['id']) {
       return this.service.loadById(route.params['id']);
     }
-    return of({_id: '', name: '', phoneNumber: '', gender: '', district: '', reference: ''});
+    return of({_id: '', name: '', phoneNumber: '', gender: '', neighbourhood: '', reference: ''});
   }
 }

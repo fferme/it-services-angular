@@ -2,21 +2,21 @@
     "name": "Felipe Ferme",
     "gender": "M",
     "phoneNumber": "21988011773",
-    "district": "Méier",
+    "neighbourhood": "Méier",
     "reference": "eu"
   },
   {
     "name": "Jorge Silva",
     "gender": "M",
     "phoneNumber": "21988014773",
-    "district": "Jacaré",
+    "neighbourhood": "Jacaré",
     "reference": "Amigo da Mei"
   },
   {
     "name": "Bruna Machado",
     "gender": "F",
     "phoneNumber": "21988011766",
-    "district": "Santíssimo",
+    "neighbourhood": "Santíssimo",
     "reference": "Muié"
   }
 ]

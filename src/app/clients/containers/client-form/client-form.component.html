@@ -1,14 +1,14 @@
 <mat-card>
   <mat-card-content>
-    <mat-toolbar color="primary">Clients</mat-toolbar>
+    <mat-toolbar color="primary" class="margin">Clients</mat-toolbar>
 
     <form [formGroup]="clientForm" class="min-width">
       <mat-form-field class="full-width">
-        <input formControlName="name" matInput placeholder="Name" formControlName="name">
+        <input formControlName="name" matInput placeholder="Nome" formControlName="name">
       </mat-form-field>
 
       <mat-radio-group formControlName="gender" aria-label="Gender" class="gender-button" >
-        <mat-radio-button  value="M" checked>Masculino</mat-radio-button>
+        <mat-radio-button value="M" checked>Masculino</mat-radio-button>
         <mat-radio-button value="F">Feminino</mat-radio-button>
       </mat-radio-group>
 
@@ -17,7 +17,7 @@
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <input matInput formControlName="district" placeholder="District" formControlName="district">
+        <input matInput formControlName="neighbourhood" placeholder="neighbourhood" formControlName="neighbourhood">
       </mat-form-field>
 
       <mat-form-field class="full-width">
@@ -28,7 +28,6 @@
 
   <mat-card-actions class="actions-center">
     <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
-    <button mat-raised-button (click)="onCancel()" class="btn-space">Cancel</button>
   </mat-card-actions>
 
 </mat-card>

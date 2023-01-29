@@ -23,4 +23,11 @@ mat-card {
 
 .gender-button {
   display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.margin {
+  margin-bottom: 40px;
 }

@@ -3,6 +3,6 @@ export interface Client {
   name: string;
   gender: string;
   phoneNumber: string;
-  district: string;
+  neighbourhood: string;
   reference: string;
 }
