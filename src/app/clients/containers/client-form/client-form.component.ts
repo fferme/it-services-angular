@@ -54,6 +54,9 @@ export class ClientFormComponent {
       error: (error) => this.onError()
     })
   }
+  onBack() {
+    this.location.back();
+  }
 
   onCancel() {
     this.location.back();

@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-content>
-    <mat-toolbar color="primary" class="margin">Clients</mat-toolbar>
+    <mat-toolbar color="primary" class="margin">Clientes</mat-toolbar>
 
     <form [formGroup]="clientForm" class="min-width">
       <mat-form-field class="full-width">
@@ -27,7 +27,8 @@
   </mat-card-content>
 
   <mat-card-actions class="actions-center">
-    <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+    <button mat-raised-button color="warn" (click)="onBack()">Voltar</button>
   </mat-card-actions>
 
 </mat-card>
