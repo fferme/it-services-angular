@@ -1,0 +1,25 @@
+<table dataSource class="table table-bordered">
+  <thead>
+    <tr class="table-active">
+      <th scope="col">Ações</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Gênero</th>
+      <th scope="col">Celular</th>
+      <th scope="col">Bairro</th>
+      <th scope="col">Referência</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let client of clients">
+      <td>
+
+      </td>
+      <td>{{ client.name }}</td>
+      <td>{{ client.gender }}</td>
+      <td>{{ client.phoneNumber }}</td>
+      <td>{{ client.neighbourhood }}</td>
+      <td>{{ client.reference }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first } from 'rxjs';
+import { first, tap } from 'rxjs';
 
 import { Client } from '../model/client';
 
@@ -15,8 +15,8 @@ export class ClientsService {
   list() {
     return this.httpClient.get<Client[]>(this.API)
     .pipe(
-      first()
-
+      first(),
+      tap(clients => console.log(clients))
     );
   }
 

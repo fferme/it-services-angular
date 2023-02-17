@@ -1,0 +1,17 @@
+<div class="card container">
+  <div class="card-body">
+    <nav class="navbar">
+      <p class="fs-1 fw-bolder">Clientes</p>
+      <div class="back-button">
+        <button type="button" class="btn btn-danger" (click)="onBack()"><b>Voltar</b></button>
+      </div>
+    </nav>
+
+    <div class="column-flex mat-elevation-z8">
+      <app-clients-list *ngIf="clients$ | async as clients" [clients]="clients">
+      </app-clients-list>
+    </div>
+
+  </div>
+</div>
+

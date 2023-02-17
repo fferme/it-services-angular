@@ -3,9 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, first, of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
-
-import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { Client } from '../../model/client';
 import { ClientsService } from '../../services/clients.service';
 
@@ -32,16 +29,12 @@ export class ClientsComponent {
       first(),
       catchError(error => {
         this.onError('Erro ao carregar cursos.');
-        console.log(error);
         return of([])
       })
     );
   }
 
   onError(errorMsg: string) {
-    // this.dialog.open(ErrorDialogComponent, {
-    //   data: errorMsg
-    // });
   }
 
   onBack() {
@@ -57,25 +50,5 @@ export class ClientsComponent {
   }
 
   onDelete(client: Client) {
-  //    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-  //      data: 'Confirmar deleção?',
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((result: boolean) => {
-  //     if (result) {
-  //       this.clientsService.delete(client._id).subscribe({
-  //         next: (result) => {
-  //           this.refresh();
-  //           // this.snackBar.open("Cliente removido com sucesso!", 'X', {
-  //           //   duration: 5000,
-  //           //   verticalPosition: 'top',
-  //           //   horizontalPosition: 'center'
-  //           // })
-  //         },
-  //         error: (error) => this.onError("Erro ao tentar remover curso")
-  //       });
-  //     }
-  //   })
-  // }
   }
 }
