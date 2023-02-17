@@ -1,7 +1,5 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, first, of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -21,11 +19,9 @@ export class ClientsComponent {
 
   constructor(
     private clientsService: ClientsService,
-    public dialog: MatDialog,
     private router: Router,
     private activeRoute: ActivatedRoute,
     private location: Location,
-    private snackBar: MatSnackBar
     ) {
     this.refresh();
   }
@@ -43,9 +39,9 @@ export class ClientsComponent {
   }
 
   onError(errorMsg: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: errorMsg
-    });
+    // this.dialog.open(ErrorDialogComponent, {
+    //   data: errorMsg
+    // });
   }
 
   onBack() {
@@ -61,24 +57,25 @@ export class ClientsComponent {
   }
 
   onDelete(client: Client) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: 'Confirmar deleção?',
-    });
+  //    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+  //      data: 'Confirmar deleção?',
+  //   });
 
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result) {
-        this.clientsService.delete(client._id).subscribe({
-          next: (result) => {
-            this.refresh();
-            this.snackBar.open("Cliente removido com sucesso!", 'X', {
-              duration: 5000,
-              verticalPosition: 'top',
-              horizontalPosition: 'center'
-            })
-          },
-          error: (error) => this.onError("Erro ao tentar remover curso")
-        });
-      }
-    })
+  //   dialogRef.afterClosed().subscribe((result: boolean) => {
+  //     if (result) {
+  //       this.clientsService.delete(client._id).subscribe({
+  //         next: (result) => {
+  //           this.refresh();
+  //           // this.snackBar.open("Cliente removido com sucesso!", 'X', {
+  //           //   duration: 5000,
+  //           //   verticalPosition: 'top',
+  //           //   horizontalPosition: 'center'
+  //           // })
+  //         },
+  //         error: (error) => this.onError("Erro ao tentar remover curso")
+  //       });
+  //     }
+  //   })
+  // }
   }
 }
