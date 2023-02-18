@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ChildrenOutletContexts } from '@angular/router';
 
 import { Client } from '../../model/client';
@@ -17,7 +16,6 @@ export class ClientFormComponent {
   public clientForm!: FormGroup;
 
   constructor(private clientService: ClientsService,
-    private _snackBar: MatSnackBar,
     private location: Location,
     private route: ActivatedRoute) {
       this.clientForm = new FormGroup({
@@ -63,12 +61,10 @@ export class ClientFormComponent {
   }
 
   private onSucess() {
-    this._snackBar.open("Cliente salvo com sucesso!", '', {duration: 3000})
     this.onCancel();
   }
 
   private onError() {
-    this._snackBar.open("Erro ao salvar cliente", '', {duration: 3000})
   }
 
 }
