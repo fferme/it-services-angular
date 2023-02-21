@@ -8,12 +8,23 @@
     </nav>
 
     <div class="column-flex mat-elevation-z8">
-      <app-clients-list *ngIf="clients$ | async as clients"
+      <app-clients-list *ngIf="clients$ | async as clients; else loading"
         [clients]="clients"
         (add)="onAdd()"
         (edit)="onEdit($event)"
         (delete)="onDelete($event)"
       ></app-clients-list>
+
+
+      <ng-template #loading>
+        <div class="text-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </ng-template>
+
+
     </div>
 
   </div>
