@@ -1,20 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
-import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 
 @NgModule({
   declarations: [
-    ErrorDialogComponent,
-    ConfirmationDialogComponent
+
+    AlertModalComponent
   ],
   imports: [
     CommonModule
   ],
-  exports: [
-    ErrorDialogComponent,
-    ConfirmationDialogComponent
-  ]
+  exports: [AlertModalComponent]
 })
 export class SharedModule { }

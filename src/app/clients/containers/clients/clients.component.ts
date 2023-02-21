@@ -1,10 +1,13 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, delay, first, of } from 'rxjs';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { catchError, first, of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { Client } from '../../model/client';
 import { ClientsService } from '../../services/clients.service';
+import { AlertModalComponent } from '../../../shared/components/alert-modal/alert-modal.component';
+import { AlertModalService } from 'src/app/shared/alert-modal-service.service';
 
 @Component({
   selector: 'app-clients',
@@ -13,13 +16,15 @@ import { ClientsService } from '../../services/clients.service';
 })
 export class ClientsComponent {
   clients$: Observable<Client[]> | null = null;
+  bsModalRef?: BsModalRef;
 
   constructor(
     private clientsService: ClientsService,
     private router: Router,
     private activeRoute: ActivatedRoute,
     private location: Location,
-    ) {
+    private alertModalService: AlertModalService
+  ) {
     this.refresh();
   }
 
@@ -27,7 +32,6 @@ export class ClientsComponent {
     this.clients$ = this.clientsService.list()
     .pipe(
       first(),
-      delay(3000),
       catchError(error => {
         this.onError('Erro ao carregar cursos.');
         return of([])
@@ -36,7 +40,7 @@ export class ClientsComponent {
   }
 
   onError(errorMsg: string) {
-
+    this.alertModalService.showAlertDanger("Erro ao carregar cursos. Tente novamente mais tarde.");
   }
 
   onBack() {
