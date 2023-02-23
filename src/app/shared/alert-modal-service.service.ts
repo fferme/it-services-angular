@@ -16,18 +16,23 @@ export class AlertModalService {
 
   }
 
-  private showAlert(message: string, type: string) {
-    const bsModalRef: BsModalRef = this.modalService.show(AlertModalComponent);
-    bsModalRef.content.type = type;
-    bsModalRef.content.message = message;
-
+  private showAlert(message: string, type: string, timeout: number) {
+    console.log('timeout:', timeout);
+    const config = {
+      initialState: {
+        type,
+        message,
+        timeout
+      }
+    };
+    this.modalService.show(AlertModalComponent, config);
   }
 
-  showAlertDanger(message: string) {
-    this.showAlert(message, AlertTypes.DANGER);
+  showAlertDanger(message: string, timeout: number = 2000) {
+    this.showAlert(message, AlertTypes.DANGER, timeout);
   }
 
-  showAlertSucess(message: string) {
-    this.showAlert(message, AlertTypes.SUCCESS);
+  showAlertSuccess(message: string, timeout: number = 2000) {
+    this.showAlert(message, AlertTypes.SUCCESS, timeout);
   }
 }

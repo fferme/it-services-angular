@@ -1,7 +1,7 @@
 <div class="card container mt-4">
   <div class="card-body">
-    <nav class="navbar">
-      <p class="fs-1 fw-bolder">Clientes</p>
+    <nav class="navbar bg-primary mb-2">
+      <p class="fs-1 fw-bolder text-white">Clientes</p>
       <div class="back-button">
         <button type="button" class="btn btn-danger" (click)="onBack()"><b>Voltar</b></button>
       </div>
@@ -14,7 +14,6 @@
         (edit)="onEdit($event)"
         (delete)="onDelete($event)"
       ></app-clients-list>
-
 
       <ng-template #loading>
         <div class="d-flex align-items-center">

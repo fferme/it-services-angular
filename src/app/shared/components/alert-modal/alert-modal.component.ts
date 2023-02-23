@@ -9,6 +9,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class AlertModalComponent {
   @Input() type: string = 'sucess';
   @Input() message: string = '';
+  @Input() timeout: number = 2000;
 
   constructor(public bsModalRef: BsModalRef) {
 
@@ -17,5 +18,6 @@ export class AlertModalComponent {
   onClose() {
     this.bsModalRef.hide();
   }
+
 
 }
