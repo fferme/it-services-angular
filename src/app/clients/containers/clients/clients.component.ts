@@ -30,13 +30,13 @@ export class ClientsComponent {
 
   refresh() {
     this.clients$ = this.clientsService.list()
-    .pipe(
-      first(),
-      catchError(error => {
-        this.onError('Erro ao carregar cursos.');
-        return of([])
-      })
-    );
+      .pipe(
+        first(),
+        catchError(error => {
+          this.onError('Erro ao carregar cursos.');
+          return of([])
+        })
+      );
   }
 
   onError(errorMsg: string) {
@@ -48,32 +48,20 @@ export class ClientsComponent {
   }
 
   onAdd() {
-    this.router.navigate(['new'], {relativeTo: this.activeRoute} );
+    this.router.navigate(['new'], { relativeTo: this.activeRoute });
   }
 
   onEdit(client: Client) {
-    this.router.navigate(['edit', client._id], {relativeTo: this.activeRoute} );
+    this.router.navigate(['edit', client._id], { relativeTo: this.activeRoute });
   }
 
   onDelete(client: Client) {
-  //   const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-  //     data: 'Tem certeza que deseja remover esse curso?',
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((result: boolean) => {
-  //     if (result) {
-  //       this.coursesService.remove(course._id).subscribe(
-  //         () => {
-  //           this.refresh();
-  //           this.snackBar.open('Curso removido com sucesso!', 'X', {
-  //             duration: 5000,
-  //             verticalPosition: 'top',
-  //             horizontalPosition: 'center'
-  //           });
-  //         },
-  //         () => this.onError('Erro ao tentar remover curso.')
-  //       );
-  //     }
-  //   });
+    this.clientsService.delete(client._id).subscribe({
+      next: () => {
+        this.refresh();
+        this.alertModalService.showAlertSuccess("Cliente deletado!", 1000);
+      },
+      error: () => this.onError('Erro ao tentar remover cliente.')
+    });
   }
 }

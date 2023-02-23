@@ -2,8 +2,9 @@
   <div class="card-body">
     <nav class="navbar bg-primary mb-2">
       <p class="fs-1 fw-bolder text-white">Clientes</p>
-      <div class="back-button">
-        <button type="button" class="btn btn-danger" (click)="onBack()"><b>Voltar</b></button>
+      <div aria-label="NavBar-Actions">
+        <button type="button" class="btn btn-light" (click)="refresh()">Atualizar</button>
+        <button type="button" class="btn btn-danger" (click)="onBack()">Voltar</button>
       </div>
     </nav>
 
