@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertModalService } from 'src/app/shared/alert-modal-service.service';
 
 import { ClientsService } from '../../services/clients.service';
-import { AuxService } from '../../services/aux.service';
+import { AuxiliarService } from '../../services/auxiliar.service';
 
 @Component({
   selector: 'app-client-form',
@@ -16,12 +16,12 @@ export class ClientFormComponent {
   clientForm: FormGroup;
 
   selectedDDD: any = 21;
-  filteredDDDs: string[] = this.auxService.getDDDs();
+  filteredDDDs: string[] = this.auxiliarService.getDDDs();
   text: string = "";
 
   constructor(
     private clientService: ClientsService,
-    private auxService: AuxService,
+    private auxiliarService: AuxiliarService,
     private location: Location,
     private formBuilder: FormBuilder,
     private alertModalService: AlertModalService
