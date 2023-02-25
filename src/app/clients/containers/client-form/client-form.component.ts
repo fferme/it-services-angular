@@ -1,11 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, ChildrenOutletContexts } from '@angular/router';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertModalService } from 'src/app/shared/alert-modal-service.service';
 
-import { Client } from '../../model/client';
 import { ClientsService } from '../../services/clients.service';
+import { AuxService } from '../../services/aux.service';
 
 @Component({
   selector: 'app-client-form',
@@ -16,8 +15,13 @@ export class ClientFormComponent {
 
   clientForm: FormGroup;
 
+  selectedDDD: any = 21;
+  filteredDDDs: string[] = this.auxService.getDDDs();
+  text: string = "";
+
   constructor(
     private clientService: ClientsService,
+    private auxService: AuxService,
     private location: Location,
     private formBuilder: FormBuilder,
     private alertModalService: AlertModalService
@@ -26,7 +30,6 @@ export class ClientFormComponent {
     this.location = location;
     this.clientForm = this.formBuilder.group({
       name: [null],
-      gender: [null],
       phoneNumber: [null],
       neighbourhood: [null],
       reference: [null]
@@ -34,6 +37,7 @@ export class ClientFormComponent {
   }
 
   onSubmit() {
+    this.getFullPhoneNumber();
     this.clientService.save(this.clientForm.value).subscribe({
       next: (result) => this.onSucess(),
       error: (error) => this.onError()
@@ -48,12 +52,27 @@ export class ClientFormComponent {
   }
 
   private onSucess() {
-    this.alertModalService.showAlertSuccess("Cliente salvo com sucesso!", 5000);
+    this.alertModalService.showAlertSuccess("Cliente salvo com sucesso!", 3000);
     console.log(this.clientForm.value);
     this.onBack();
   }
 
   private onError() {
+  }
+
+  getFullPhoneNumber() {
+    const ddd = this.selectedDDD;
+    const phoneNumber = this.clientForm.get('phoneNumber')?.value;
+    const fullPhoneNumber = `${ddd}${phoneNumber}`;
+
+    this.clientForm.patchValue({
+      phoneNumber: fullPhoneNumber
+    });
+  }
+
+  filterDDDs(input: any) {
+    this.text = input.target.value
+    this.filteredDDDs = this.filteredDDDs.filter(ddd => ddd.startsWith(this.text));
   }
 
 }

@@ -1,13 +1,13 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { catchError, first, of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { Client } from '../../model/client';
 import { ClientsService } from '../../services/clients.service';
-import { AlertModalComponent } from '../../../shared/components/alert-modal/alert-modal.component';
 import { AlertModalService } from 'src/app/shared/alert-modal-service.service';
+import { AuxService } from '../../services/aux.service';
 
 @Component({
   selector: 'app-clients',
@@ -20,6 +20,7 @@ export class ClientsComponent {
 
   constructor(
     private clientsService: ClientsService,
+    private auxService: AuxService,
     private router: Router,
     private activeRoute: ActivatedRoute,
     private location: Location,

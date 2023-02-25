@@ -1,6 +1,6 @@
-<div class="card card-centered" style="width: 35rem">
+<div class="card card-centered background-secondary" style="width: 35rem">
 
-  <div class="card-header bg-primary">
+  <div class="card-header background-primary">
     <nav class="navbar">
       <div class="container-fluid">
         <a class="navbar-brand text-white">Cadastro de Cliente</a>
@@ -9,30 +9,46 @@
   </div>
 
   <div class="card-body justify-content-center">
-  <form [formGroup]="clientForm">
-      <div class="mb-3 full-width">
-        <label for="name" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="name" formControlName="name">
+    <form [formGroup]="clientForm">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" placeholder="Nome" formControlName="name">
+        <label for="floatingInput">Nome</label>
       </div>
 
-      <div class="mb-3 full-width">
-        <label for="name" class="form-label">Celular</label>
-        <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber">
+      <div class="input-group mb-3">
+        <div class="btn-group dropstart">
+          <button type="button" class="btn btn-secondary dropdown-toggle background-primary" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            {{ selectedDDD || '21' }}
+          </button>
+
+          <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+            <input type="text" class="form-control" placeholder="Search" (keyup)="filterDDDs($event)">
+            <a *ngFor="let ddd of filteredDDDs" class="dropdown-item" (click)="selectedDDD = ddd">{{ ddd }}</a>
+          </div>
+        </div>
+
+        <div class="form-floating mb-0">
+          <input type="text" class="form-control" id="phoneNumber" placeholder="Celular"
+            formControlName="phoneNumber">
+          <label for="floatingInput">Celular</label>
+        </div>
       </div>
 
-      <div class="mb-3 full-width">
-        <label for="neighbourhood" class="form-label">Bairro</label>
-        <input type="text" class="form-control" id="neighbourhood" formControlName="neighbourhood">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="neighbourhood" placeholder="Bairro" formControlName="neighbourhood">
+        <label for="floatingInput">Bairro</label>
       </div>
 
-      <div class="mb-3 full-width">
-        <label for="reference" class="form-label">Referência</label>
-        <input type="text" class="form-control" id="reference" formControlName="reference">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="reference" placeholder="Referência" formControlName="reference">
+        <label for="floatingInput">Referência</label>
       </div>
+
     </form>
 
     <div class="d-flex justify-content-center">
-      <button type="button" class="btn btn-success" (click)="onSubmit()">Salvar</button>
+      <button type="button" class="btn btn-success me-1" (click)="onSubmit()">Salvar</button>
       <button type="button" class="btn btn-danger" (click)="onCancel()">Cancelar</button>
     </div>
 

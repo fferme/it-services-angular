@@ -1,10 +1,11 @@
-<div class="card container mt-4">
+<div class="card container mt-4 background-secondary">
   <div class="card-body">
-    <nav class="navbar bg-primary mb-2">
-      <p class="fs-1 fw-bolder text-white">Clientes</p>
+    <nav class="navbar rounded mb-2">
+      <p class="fs-1 fw-bolder ms-2">Clientes</p>
       <div aria-label="NavBar-Actions">
-        <button type="button" class="btn btn-light" (click)="refresh()">Atualizar</button>
-        <button type="button" class="btn btn-danger" (click)="onBack()">Voltar</button>
+        <button type="button" class="btn btn-primary background-primary border" (click)="onAdd()">Novo</button>
+        <button type="button" class="btn btn-primary background-primary border" (click)="refresh()">Atualizar</button>
+        <button type="button" class="btn btn-danger background-primary border" (click)="onBack()">Voltar</button>
       </div>
     </nav>
 
