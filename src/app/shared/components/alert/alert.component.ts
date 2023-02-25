@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-alert-modal',
-  templateUrl: './alert-modal.component.html',
-  styleUrls: ['./alert-modal.component.scss']
+  selector: 'app-alert',
+  templateUrl: './alert.component.html',
+  styleUrls: ['./alert.component.scss']
 })
-export class AlertModalComponent {
+export class AlertComponent {
   @Input() type: string = 'sucess';
   @Input() message: string = '';
   @Input() timeout: number = 2000;

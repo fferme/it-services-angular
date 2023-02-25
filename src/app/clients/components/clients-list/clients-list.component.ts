@@ -7,20 +7,12 @@ import { Client } from '../../model/client';
   templateUrl: './clients-list.component.html',
   styleUrls: ['./clients-list.component.scss']
 })
-export class ClientsListComponent implements OnInit{
+export class ClientsListComponent {
 
   @Input() clients: Client[] = [];
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
   @Output() delete = new EventEmitter(false);
-
-  constructor() {
-
-  }
-
-  ngOnInit(): void {
-
-  }
 
   onAdd() {
     this.add.emit(true);

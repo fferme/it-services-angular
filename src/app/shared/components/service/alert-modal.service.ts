@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { AlertComponent } from '../alert/alert.component';
+import { ModalComponent } from '../modal/modal.component';
 
 enum AlertTypes {
   DANGER = 'danger',
@@ -17,7 +18,6 @@ export class AlertModalService {
   }
 
   private showAlert(message: string, type: string, timeout: number) {
-    console.log('timeout:', timeout);
     const config = {
       initialState: {
         type,
@@ -25,7 +25,7 @@ export class AlertModalService {
         timeout
       }
     };
-    this.modalService.show(AlertModalComponent, config);
+    this.modalService.show(AlertComponent, config);
   }
 
   showAlertDanger(message: string, timeout: number = 2000) {
@@ -34,5 +34,20 @@ export class AlertModalService {
 
   showAlertSuccess(message: string, timeout: number = 2000) {
     this.showAlert(message, AlertTypes.SUCCESS, timeout);
+  }
+
+  showConfirmModal(title: string, message: string, okMsg?: string, cancelMsg?: string) {
+    const config = {
+      initialState: {
+        title,
+        message,
+        okMsg,
+        cancelMsg
+      }
+    };
+    const bsModalRef = this.modalService.show(ModalComponent, config);
+
+    return (<ModalComponent>bsModalRef.content).confirmResult;
+
   }
 }

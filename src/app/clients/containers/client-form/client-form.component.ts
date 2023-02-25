@@ -1,10 +1,10 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AlertModalService } from 'src/app/shared/alert-modal-service.service';
 
 import { ClientsService } from '../../services/clients.service';
 import { AuxiliarService } from '../../services/auxiliar.service';
+import { AlertModalService } from 'src/app/shared/components/service/alert-modal.service';
 
 @Component({
   selector: 'app-client-form',
@@ -15,7 +15,7 @@ export class ClientFormComponent {
 
   clientForm: FormGroup;
 
-  selectedDDD: any = 21;
+  selectedDDD: string = "21";
   filteredDDDs: string[] = this.auxiliarService.getDDDs();
   text: string = "";
 

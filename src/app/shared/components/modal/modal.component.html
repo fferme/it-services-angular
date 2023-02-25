@@ -1,0 +1,13 @@
+<div class="modal-content background-primary">
+  <div class="modal-header">
+    <h5 class="modal-title text-light"> {{ title }} </h5>
+  </div>
+  <div class="modal-body">
+    <p class="text-light"> {{ message }} </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onClose()"> {{ cancelMsg }}
+    </button>
+    <button type="button" class="btn btn-primary" (click)="onConfirm()"> {{ okMsg }} </button>
+  </div>
+</div>
