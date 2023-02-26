@@ -1,10 +1,11 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, NonNullableFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { NonNullableFormBuilder } from '@angular/forms';
+import { AlertModalService } from 'src/app/shared/components/service/alert-modal.service';
 
 import { ClientsService } from '../../services/clients.service';
-import { AuxiliarService } from '../../services/auxiliar.service';
-import { AlertModalService } from 'src/app/shared/components/service/alert-modal.service';
+import { ActivatedRoute } from '@angular/router';
+import { Client } from '../../model/client';
 
 @Component({
   selector: 'app-client-form',
@@ -12,7 +13,10 @@ import { AlertModalService } from 'src/app/shared/components/service/alert-modal
   styleUrls: ['./client-form.component.scss'],
 })
 
-export class ClientFormComponent {
+export class ClientFormComponent implements OnInit {
+  selectedDDD: string = '21';
+  text: string = '';
+
   clientForm = this.formBuilder.group({
     name: [''],
     phoneNumber: [''],
@@ -20,18 +24,28 @@ export class ClientFormComponent {
     reference: ['']
   });
 
-  selectedDDD: string = '21';
-  text: string = '';
-
   constructor(
     private clientService: ClientsService,
-    private auxiliarService: AuxiliarService,
     private location: Location,
     private formBuilder: NonNullableFormBuilder,
-    private alertModalService: AlertModalService
+    private alertModalService: AlertModalService,
+    private route: ActivatedRoute
   ) {
     this.clientService = clientService;
     this.location = location;
+  }
+
+  ngOnInit(): void {
+    const client: Client = this.route.snapshot.data['client'];
+    this.selectedDDD = client.phoneNumber.slice(0, 2);
+    const trimmedPhoneNumber: string = client.phoneNumber.slice(2);
+
+    this.clientForm.setValue({
+      name: client.name,
+      phoneNumber: trimmedPhoneNumber,
+      neighbourhood: client.neighbourhood,
+      reference: client.reference
+    })
   }
 
   onSubmit() {
@@ -60,11 +74,15 @@ export class ClientFormComponent {
 
   getFullPhoneNumber() {
     const ddd = this.selectedDDD;
+    console.log(ddd);
     const phoneNumber = this.clientForm.get('phoneNumber')?.value;
+    console.log(phoneNumber);
     const fullPhoneNumber = `${ddd}${phoneNumber}`;
+    console.log(fullPhoneNumber);
 
     this.clientForm.patchValue({
       phoneNumber: fullPhoneNumber,
     });
   }
+
 }

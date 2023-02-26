@@ -25,9 +25,7 @@ export class ClientsService {
   }
 
   save(client: Partial<Client>) {
-    console.log(client);
     if (client._id) {
-      console.log(client);
       return this.update(client);
     }
     return this.create(client);
