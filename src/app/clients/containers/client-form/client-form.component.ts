@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, NonNullableFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 import { ClientsService } from '../../services/clients.service';
 import { AuxiliarService } from '../../services/auxiliar.service';
@@ -9,40 +9,39 @@ import { AlertModalService } from 'src/app/shared/components/service/alert-modal
 @Component({
   selector: 'app-client-form',
   templateUrl: './client-form.component.html',
-  styleUrls: ['./client-form.component.scss']
+  styleUrls: ['./client-form.component.scss'],
 })
+
 export class ClientFormComponent {
+  clientForm = this.formBuilder.group({
+    name: [''],
+    phoneNumber: [''],
+    neighbourhood: [''],
+    reference: ['']
+  });
 
-  clientForm: FormGroup;
-
-  selectedDDD: string = "21";
-  filteredDDDs: string[] = this.auxiliarService.getDDDs();
-  text: string = "";
+  selectedDDD: string = '21';
+  text: string = '';
 
   constructor(
     private clientService: ClientsService,
     private auxiliarService: AuxiliarService,
     private location: Location,
-    private formBuilder: FormBuilder,
+    private formBuilder: NonNullableFormBuilder,
     private alertModalService: AlertModalService
-    ) {
+  ) {
     this.clientService = clientService;
     this.location = location;
-    this.clientForm = this.formBuilder.group({
-      name: [null],
-      phoneNumber: [null],
-      neighbourhood: [null],
-      reference: [null]
-    });
   }
 
   onSubmit() {
     this.getFullPhoneNumber();
     this.clientService.save(this.clientForm.value).subscribe({
       next: (result) => this.onSucess(),
-      error: (error) => this.onError()
-    })
+      error: (error) => this.onError(),
+    });
   }
+
   onBack() {
     this.location.back();
   }
@@ -52,13 +51,12 @@ export class ClientFormComponent {
   }
 
   private onSucess() {
-    this.alertModalService.showAlertSuccess("Cliente salvo com sucesso!", 3000);
+    this.alertModalService.showAlertSuccess('Cliente salvo com sucesso!', 3000);
     console.log(this.clientForm.value);
     this.onBack();
   }
 
-  private onError() {
-  }
+  private onError() { }
 
   getFullPhoneNumber() {
     const ddd = this.selectedDDD;
@@ -66,13 +64,7 @@ export class ClientFormComponent {
     const fullPhoneNumber = `${ddd}${phoneNumber}`;
 
     this.clientForm.patchValue({
-      phoneNumber: fullPhoneNumber
+      phoneNumber: fullPhoneNumber,
     });
   }
-
-  filterDDDs(input: any) {
-    this.text = input.target.value
-    this.filteredDDDs = this.filteredDDDs.filter(ddd => ddd.startsWith(this.text));
-  }
-
 }
