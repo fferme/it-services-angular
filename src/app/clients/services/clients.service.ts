@@ -15,8 +15,7 @@ export class ClientsService {
   list() {
     return this.httpClient.get<Client[]>(this.API)
     .pipe(
-      first(),
-      tap(clients => console.log(clients))
+      first()
     );
   }
 

@@ -14,7 +14,12 @@ import { Client } from '../../model/client';
 })
 
 export class ClientFormComponent implements OnInit {
-  selectedDDD: string = '21';
+
+  onChangeDDD(event: any) {
+    this.selectedDDD = event.target['value'];
+  }
+
+  selectedDDD: number = 21;
   text: string = '';
 
   clientForm = this.formBuilder.group({
@@ -37,15 +42,17 @@ export class ClientFormComponent implements OnInit {
 
   ngOnInit(): void {
     const client: Client = this.route.snapshot.data['client'];
-    this.selectedDDD = client.phoneNumber.slice(0, 2);
-    const trimmedPhoneNumber: string = client.phoneNumber.slice(2);
+    if (client.phoneNumber) {
+      this.selectedDDD = Number(client.phoneNumber.slice(0, 2));
+      const trimmedPhoneNumber: string = client.phoneNumber.slice(2);
 
-    this.clientForm.setValue({
-      name: client.name,
-      phoneNumber: trimmedPhoneNumber,
-      neighbourhood: client.neighbourhood,
-      reference: client.reference
-    })
+      this.clientForm.setValue({
+        name: client.name,
+        phoneNumber: trimmedPhoneNumber,
+        neighbourhood: client.neighbourhood,
+        reference: client.reference
+      })
+    }
   }
 
   onSubmit() {
@@ -66,19 +73,14 @@ export class ClientFormComponent implements OnInit {
 
   private onSucess() {
     this.alertModalService.showAlertSuccess('Cliente salvo com sucesso!', 3000);
-    console.log(this.clientForm.value);
     this.onBack();
   }
 
   private onError() { }
 
   getFullPhoneNumber() {
-    const ddd = this.selectedDDD;
-    console.log(ddd);
     const phoneNumber = this.clientForm.get('phoneNumber')?.value;
-    console.log(phoneNumber);
-    const fullPhoneNumber = `${ddd}${phoneNumber}`;
-    console.log(fullPhoneNumber);
+    const fullPhoneNumber = `${this.selectedDDD}${phoneNumber}`;
 
     this.clientForm.patchValue({
       phoneNumber: fullPhoneNumber,

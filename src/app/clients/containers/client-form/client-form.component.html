@@ -18,7 +18,7 @@
 
       <div class="row g-3 mb-3">
         <div class="form-floating col-sm-2">
-          <input type="text" class="form-control" id="ddd" placeholder="DDD" value="{{ selectedDDD || '21' }}">
+          <input type="text" class="form-control" id="ddd" placeholder="DDD" [value]="selectedDDD" (change)="onChangeDDD($event)">
           <label for="floatingInput">DDD</label>
         </div>
         <div class="form-floating col-sm">

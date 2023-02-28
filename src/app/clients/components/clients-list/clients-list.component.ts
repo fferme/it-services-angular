@@ -10,9 +10,9 @@ import { Client } from '../../model/client';
 export class ClientsListComponent {
 
   @Input() clients: Client[] = [];
-  @Output() add = new EventEmitter(false);
-  @Output() edit = new EventEmitter(false);
-  @Output() delete = new EventEmitter(false);
+  @Output() add = new EventEmitter<boolean>(false);
+  @Output() edit = new EventEmitter<Client>();
+  @Output() delete = new EventEmitter<Client>();
 
   onAdd() {
     this.add.emit(true);
